@@ -1,0 +1,45 @@
+disabled_rules:
+  - generic_type_name
+  - trailing_whitespace
+
+opt_in_rules:
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - contains_over_first_not_nil
+  - empty_count
+  - explicit_init
+  - let_var_whitespace
+  - multiline_arguments
+  - multiline_parameters
+  - number_separator
+  - operator_usage_whitespace
+  - overridden_super_call
+  - private_outlet
+  - prohibited_super_call
+  - redundant_nil_coalescing
+  - trailing_closure
+  - unneeded_parentheses_in_closure_argument
+  - explicit_acl
+  - extension_access_modifier
+  - fatal_error_message
+  - sorted_imports
+
+excluded:
+  - Carthage
+  - Pods
+
+line_length: 120
+
+type_body_length:
+  warning: 150
+  error: 200
+
+file_length:
+  warning: 140
+  error: 240
+  ignore_comment_only_lines: true
+
+nesting:
+  type_level:
+    warning: 4
