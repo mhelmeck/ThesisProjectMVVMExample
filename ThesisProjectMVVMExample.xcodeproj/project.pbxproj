@@ -144,11 +144,10 @@
 		98572AF321BD9F53009C8D81 /* ThesisProjectMVVMExample */ = {
 			isa = PBXGroup;
 			children = (
-				98C85B7921C9910E00907426 /* Models */,
+				98C85B9C21C9944500907426 /* Project */,
 				98C85B6921C9900300907426 /* Utilities */,
 				98C85B6821C98FDF00907426 /* Resources */,
 				98572AF421BD9F53009C8D81 /* AppDelegate.swift */,
-				98572AF621BD9F53009C8D81 /* ViewController.swift */,
 				98572B0321BD9F54009C8D81 /* Info.plist */,
 				98572AFB21BD9F53009C8D81 /* ThesisProjectMVVMExample.xcdatamodeld */,
 			);
@@ -231,6 +230,31 @@
 				98C85B8A21C991A500907426 /* APISource.swift */,
 			);
 			path = APIModels;
+			sourceTree = "<group>";
+		};
+		98C85B9821C992FF00907426 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				98572AF621BD9F53009C8D81 /* ViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		98C85B9921C9931200907426 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		98C85B9C21C9944500907426 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				98C85B9821C992FF00907426 /* Views */,
+				98C85B9921C9931200907426 /* ViewModels */,
+				98C85B7921C9910E00907426 /* Models */,
+			);
+			path = Project;
 			sourceTree = "<group>";
 		};
 		A14CED487E528580629B74F5 /* Frameworks */ = {
