@@ -1,5 +1,5 @@
 //
-//  File4.swift
+//  ForecastCollectionAdapter.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 18/12/2018.

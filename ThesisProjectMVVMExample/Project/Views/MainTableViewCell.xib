@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dI7-01-jS7" customClass="MainTableViewCell" customModule="ThesisProjectMVVMExample">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dI7-01-jS7" id="8PO-2Z-cT9">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kpC-Pg-7au">
+                        <rect key="frame" x="192" y="-0.5" width="44" height="44.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="6dT-IL-riM"/>
+                            <constraint firstAttribute="height" constant="44" id="fkZ-xO-OBz"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oks-Fe-NFd" userLabel="cityNameLabel">
+                        <rect key="frame" x="32" y="11.5" width="58" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="StV-E4-ZfX" userLabel="tempLabel">
+                        <rect key="frame" x="106" y="11.5" width="54" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="54" id="01K-vY-DgI"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yfv-o2-b6D" userLabel="NavigationButton">
+                        <rect key="frame" x="236" y="0.0" width="84" height="43.5"/>
+                        <connections>
+                            <action selector="navigationButtonTapped:" destination="dI7-01-jS7" eventType="touchUpInside" id="KFH-cM-51p"/>
+                        </connections>
+                    </button>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigation_icon" translatesAutoresizingMaskIntoConstraints="NO" id="wzv-uk-75f">
+                        <rect key="frame" x="268" y="12" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="7l3-jV-CEl"/>
+                            <constraint firstAttribute="width" constant="20" id="whw-xm-qFF"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Yfv-o2-b6D" firstAttribute="leading" secondItem="kpC-Pg-7au" secondAttribute="trailing" id="0Lc-6a-vGg"/>
+                    <constraint firstItem="StV-E4-ZfX" firstAttribute="centerY" secondItem="8PO-2Z-cT9" secondAttribute="centerY" id="0hY-kb-Z4b"/>
+                    <constraint firstItem="kpC-Pg-7au" firstAttribute="leading" secondItem="StV-E4-ZfX" secondAttribute="trailing" constant="32" id="EeV-o2-a9P"/>
+                    <constraint firstAttribute="bottom" secondItem="Yfv-o2-b6D" secondAttribute="bottom" id="GaD-MA-q1F"/>
+                    <constraint firstItem="Yfv-o2-b6D" firstAttribute="top" secondItem="8PO-2Z-cT9" secondAttribute="top" id="Mte-XY-FFw"/>
+                    <constraint firstItem="wzv-uk-75f" firstAttribute="leading" secondItem="kpC-Pg-7au" secondAttribute="trailing" constant="32" id="TLY-s1-yLy"/>
+                    <constraint firstAttribute="trailing" secondItem="Yfv-o2-b6D" secondAttribute="trailing" id="VTj-qK-diG"/>
+                    <constraint firstItem="wzv-uk-75f" firstAttribute="centerY" secondItem="8PO-2Z-cT9" secondAttribute="centerY" id="ZH3-HQ-9rj"/>
+                    <constraint firstItem="oks-Fe-NFd" firstAttribute="leading" secondItem="8PO-2Z-cT9" secondAttribute="leading" constant="32" id="ceV-De-G6m"/>
+                    <constraint firstItem="StV-E4-ZfX" firstAttribute="leading" secondItem="oks-Fe-NFd" secondAttribute="trailing" constant="16" id="gBp-pf-wHW"/>
+                    <constraint firstAttribute="trailing" secondItem="wzv-uk-75f" secondAttribute="trailing" constant="32" id="hpQ-In-rH5"/>
+                    <constraint firstItem="kpC-Pg-7au" firstAttribute="centerY" secondItem="8PO-2Z-cT9" secondAttribute="centerY" id="oS6-nu-d9y"/>
+                    <constraint firstItem="oks-Fe-NFd" firstAttribute="centerY" secondItem="8PO-2Z-cT9" secondAttribute="centerY" id="xcA-uM-xDM"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="cZ9-SJ-2hn"/>
+            <connections>
+                <outlet property="cityNameLabel" destination="oks-Fe-NFd" id="BcR-PA-zYm"/>
+                <outlet property="iconImageView" destination="kpC-Pg-7au" id="AYX-kD-obA"/>
+                <outlet property="tempLabel" destination="StV-E4-ZfX" id="dhb-88-uhx"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="navigation_icon" width="16" height="16"/>
+    </resources>
+</document>

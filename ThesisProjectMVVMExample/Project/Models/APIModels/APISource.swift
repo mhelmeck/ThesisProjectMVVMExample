@@ -1,5 +1,5 @@
 //
-//  File3.swift
+//  APISource.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 18/12/2018.

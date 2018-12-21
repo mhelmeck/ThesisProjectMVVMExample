@@ -1,5 +1,5 @@
 //
-//  File5.swift
+//  LocationAdapter.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 18/12/2018.

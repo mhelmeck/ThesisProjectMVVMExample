@@ -1,5 +1,5 @@
 //
-//  File2.swift
+//  CoordinatesAdapter.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 18/12/2018.

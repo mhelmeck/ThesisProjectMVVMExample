@@ -1,5 +1,5 @@
 //
-//  File4.swift
+//  DataManager.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 18/12/2018.

@@ -1,5 +1,5 @@
 //
-//  File2.swift
+//  Coordinates.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 18/12/2018.
