@@ -67,8 +67,19 @@ public class MainTableViewModel {
         selectedIndex = row
     }
     
+    public func userPressedNaviagationButton(at row: Int?) {
+        selectedIndex = row ?? 0
+    }
+    
     public func getCellViewModel(at row: Int) -> MainTableCellViewModel {
         return cellViewModels[row]
+    }
+    
+    public func getMapViewModel() -> MapViewModel {
+        let city = dataManager.cityCollection[selectedIndex]
+        
+        return MapViewModel(latitude: city.coordinates.lat,
+                            longitude: city.coordinates.lon)
     }
 
     // Private methods

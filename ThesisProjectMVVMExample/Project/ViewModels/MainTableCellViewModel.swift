@@ -8,9 +8,9 @@
 
 public struct MainTableCellViewModel {
     // ViewProperties
-    public var cityName: String = ""
-    public var temperature: String = ""
-    public var iconName: String = ""
+    public var cityName: String
+    public var temperature: String
+    public var iconName: String
     
     // Init
     public init(cityName: String,

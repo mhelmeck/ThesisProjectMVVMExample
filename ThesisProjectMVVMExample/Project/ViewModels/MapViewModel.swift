@@ -6,4 +6,18 @@
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 
-import Foundation
+public struct MapViewModel {
+    public var latitude: Double
+    public var longitude: Double
+    
+    public var latitudeDelta = 0.7
+    public var longitudeDelta = 0.7
+    
+    public var isLoaded = false
+    
+    public init(latitude: Double,
+                longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
+    }
+}

@@ -90,16 +90,14 @@ public class MainTableViewController: UITableViewController {
 //
 //            viewController.dataManager = dataManager
 //        }
-//
-//        if segue.identifier == "PushMapSegue" {
-//            guard let viewController = segue.destination as? MapViewController else {
-//                return
-//            }
-//
-//            let city = dataManager.cityCollection[selectedIndex]
-//            viewController.lat = city.coordinates.lat
-//            viewController.lon = city.coordinates.lon
-//        }
+
+        if segue.identifier == "PushMapSegue" {
+            guard let viewController = segue.destination as? MapViewController else {
+                return
+            }
+            
+            viewController.viewModel = viewModel.getMapViewModel()
+        }
     }
 }
 
@@ -134,7 +132,8 @@ public extension MainTableViewController {
 
 extension MainTableViewController: MainTableViewCellDelegate {
     public func mainTableViewCellDidTapNavigationButton(_ cell: MainTableViewCell) {
-        viewModel.selectedIndex = tableView.indexPath(for: cell)?.row ?? 0
+        viewModel.userPressedNaviagationButton(at: tableView.indexPath(for: cell)?.row)
+        
         performSegue(withIdentifier: "PushMapSegue", sender: nil)
     }
 }
