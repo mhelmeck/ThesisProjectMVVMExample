@@ -6,25 +6,18 @@
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 
-public class MainTableCellViewModel {
+public struct MainTableCellViewModel {
     // ViewProperties
     public var cityName: String = ""
-    public var temp: String = ""
-    public var iconImageName: String = ""
-    
-    // ModelProperty to be injected
-    private let city: City
+    public var temperature: String = ""
+    public var iconName: String = ""
     
     // Init
-    public init(city: City) {
-        self.city = city
-        
-        configureCell()
-    }
-    
-    public func configureCell() {
-        cityName = city.name
-        temp = [String(Int(city.brief.currentTemperature)), "°C"].joined(separator: " ")
-        iconImageName = AssetCodeMapper.map(city.brief.asset)
+    public init(cityName: String,
+                temperature: String,
+                iconName: String) {
+        self.cityName = cityName
+        self.temperature = temperature
+        self.iconName = iconName
     }
 }

@@ -44,8 +44,8 @@ public class MainTableViewController: UITableViewController {
             }
         }
         
-        viewModel.updateActivityIndicator = { [weak self] shouldAnimate in
-            shouldAnimate ? self?.activityIndicatorView.startAnimating() : self?.activityIndicatorView.stopAnimating()
+        viewModel.updateActivityIndicator = { [weak self] isLoading in
+            isLoading ? self?.activityIndicatorView.startAnimating() : self?.activityIndicatorView.stopAnimating()
         }
     }
     
@@ -73,13 +73,39 @@ public class MainTableViewController: UITableViewController {
     
     // Actions
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
+//        if segue.identifier == "PushDetailsSegue" {
+//            guard let viewController = segue.destination as? DetailViewController else {
+//                return
+//            }
+//
+//            let city = dataManager.cityCollection[selectedIndex]
+//            viewController.forecastCollection = city.forecastCollection
+//            viewController.cityName = city.name
+//        }
+//
+//        if segue.identifier == "PushAddCitySegue" {
+//            guard let viewController = segue.destination as? AddCityViewController else {
+//                return
+//            }
+//
+//            viewController.dataManager = dataManager
+//        }
+//
+//        if segue.identifier == "PushMapSegue" {
+//            guard let viewController = segue.destination as? MapViewController else {
+//                return
+//            }
+//
+//            let city = dataManager.cityCollection[selectedIndex]
+//            viewController.lat = city.coordinates.lat
+//            viewController.lon = city.coordinates.lon
+//        }
     }
 }
 
 public extension MainTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.amountOfCityCollection
+        return viewModel.rowsNumber
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -89,15 +115,15 @@ public extension MainTableViewController {
                 fatalError("Failed to dequeue reusable cell")
         }
         
-        // INFO: - maybe it should be in viewModel
-        cell.viewModel = MainTableCellViewModel(city: viewModel.getCityWithIndex(indexPath.row))
+        cell.viewModel = viewModel.getCellViewModel(at: indexPath.row)
         cell.delegate = self
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.selectedIndex = indexPath.row
+        viewModel.userPressedCell(at: indexPath.row)
+        
         performSegue(withIdentifier: "PushDetailsSegue", sender: nil)
     }
     

@@ -17,20 +17,25 @@ public class MainTableViewModel {
             self.updateSeparatorStyle(separatorStyle)
         }
     }
-    public var shouldActivityIndicatorAnimate = false {
+    public var isLoading = false {
         didSet {
-            self.updateActivityIndicator(shouldActivityIndicatorAnimate)
+            self.updateActivityIndicator(isLoading)
         }
     }
 
     public var selectedIndex = 0
     public var rowHeight: Float = 60.0
-    public var amountOfCityCollection: Int {
-        return dataManager.cityCollection.count
+    public var rowsNumber: Int {
+        return cellViewModels.count
     }
     
     // Private properties
     private let dataManager: DataManager
+    private var cellViewModels = [MainTableCellViewModel]() {
+        didSet {
+            self.updateView()
+        }
+    }
     
     // Init
     public init(dataManager: DataManager) {
@@ -39,21 +44,40 @@ public class MainTableViewModel {
     
     // Public methods
     public func fetchInitialData() {
-        shouldActivityIndicatorAnimate = true
+        isLoading = true
         var requestCounter = dataManager.cityCodes.count
         self.dataManager.cityCodes.forEach { code in
             self.dataManager.fetchForecast(forCityCode: code) { [weak self] in
+                guard let self = self else { return }
+                
                 requestCounter -= 1
                 if requestCounter == 0 {
-                    self?.updateView()
-                    self?.separatorStyle = .singleLine
-                    self?.shouldActivityIndicatorAnimate = false
+                    self.updateView()
+                    self.separatorStyle = .singleLine
+                    self.isLoading = false
+                    self.dataManager.cityCollection.forEach { city in
+                        self.cellViewModels.append(self.createCellViewModel(city: city))
+                    }
                 }
             }
         }
     }
     
-    public func getCityWithIndex(_ index: Int) -> City {
-        return dataManager.cityCollection[index]
+    public func userPressedCell(at row: Int) {
+        selectedIndex = row
+    }
+    
+    public func getCellViewModel(at row: Int) -> MainTableCellViewModel {
+        return cellViewModels[row]
+    }
+
+    // Private methods
+    private func createCellViewModel(city: City) -> MainTableCellViewModel {
+        let temperature = [String(Int(city.brief.currentTemperature)), "°C"].joined(separator: " ")
+        let iconName = AssetCodeMapper.map(city.brief.asset)
+        
+        return MainTableCellViewModel(cityName: city.name,
+                                      temperature: temperature,
+                                      iconName: iconName)
     }
 }

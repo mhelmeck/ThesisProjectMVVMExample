@@ -21,29 +21,34 @@ public class MainTableViewCell: UITableViewCell {
     weak public var delegate: MainTableViewCellDelegate?
     public var viewModel: MainTableCellViewModel! {
         didSet {
-            setupView()
+            bind(viewModel: viewModel)
         }
     }
     
     // Init
     override public func awakeFromNib() {
         super.awakeFromNib()
+        
+        setupView()
     }
     
     override public func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    // Methods
+    // Public methods
     @IBAction public func navigationButtonTapped(_ sender: Any) {
         delegate?.mainTableViewCellDidTapNavigationButton(self)
     }
     
+    // Private methods
     private func setupView() {
         self.selectionStyle = .none
-        
+    }
+    
+    private func bind(viewModel: MainTableCellViewModel) {
         cityNameLabel.text = viewModel.cityName
-        tempLabel.text = viewModel.temp
-        iconImageView.image = UIImage(named: viewModel.iconImageName)
+        tempLabel.text = viewModel.temperature
+        iconImageView.image = UIImage(named: viewModel.iconName)
     }
 }
