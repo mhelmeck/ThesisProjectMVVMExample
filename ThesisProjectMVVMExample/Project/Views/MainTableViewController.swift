@@ -52,7 +52,7 @@ public class MainTableViewController: UITableViewController {
     public override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        tableView.reloadData()
+        viewModel.reloadData()
     }
     
     public override func viewWillAppear(_ animated: Bool) {

@@ -74,8 +74,9 @@ public class AddCityViewModel {
         dataManager.fetchLocations(withQuery: phrase) { [weak self] in
             guard let self = self else { return }
             
-            self.dataManager.cityCollection.forEach { city in
-                self.addCityCellViewModels.append(self.createAddCityCellViewModel(city: city))
+            self.addCityCellViewModels.removeAll()
+            self.dataManager.locationCollection.forEach { location in
+                self.addCityCellViewModels.append(self.createAddCityCellViewModel(location: location))
             }
             self.updateView()
         }
@@ -121,8 +122,8 @@ public class AddCityViewModel {
     }
     
     // MARK: - Private methods
-    private func createAddCityCellViewModel(city: City) -> AddCityCellViewModel {
-        return AddCityCellViewModel(cityName: city.name,
-                                    cityCode: city.code)
+    private func createAddCityCellViewModel(location: Location) -> AddCityCellViewModel {
+        return AddCityCellViewModel(cityName: location.name,
+                                    cityCode: location.code)
     }
 }

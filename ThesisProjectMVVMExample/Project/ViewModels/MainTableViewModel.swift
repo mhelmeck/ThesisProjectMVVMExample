@@ -92,6 +92,14 @@ public class MainTableViewModel {
     public func getAddCityViewModel() -> AddCityViewModel {
         return AddCityViewModel(dataManager: dataManager)
     }
+    
+    public func reloadData() {
+        cellViewModels.removeAll()
+        dataManager.cityCollection.forEach { city in
+            cellViewModels.append(self.createCellViewModel(city: city))
+        }
+        updateView()
+    }
 
     // Private methods
     private func createCellViewModel(city: City) -> MainTableCellViewModel {
