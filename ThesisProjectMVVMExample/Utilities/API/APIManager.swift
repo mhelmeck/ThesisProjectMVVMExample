@@ -9,6 +9,7 @@
 import Foundation
 
 public class APIManager: APIManagerType {
+    // MARK: - Public methods
     public func fetchCity(forCode code: String, completion: @escaping (City) -> Void) {
         let urlString = "https://www.metaweather.com/api/location/\(code)/"
         
@@ -42,7 +43,8 @@ public class APIManager: APIManagerType {
 }
 
 private extension APIManager {
-    func fetchData<T: Decodable>(withURLString urlString: String, completion: @escaping APIResultHandler<T>) {
+    // MARK: - Private methods
+    private func fetchData<T: Decodable>(withURLString urlString: String, completion: @escaping APIResultHandler<T>) {
         guard let url = URL(string: urlString) else {
             completion(.error(APIError.invalidURL))
             return
