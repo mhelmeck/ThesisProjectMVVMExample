@@ -81,13 +81,13 @@ public class MainTableViewController: UITableViewController {
             viewController.viewModel = viewModel.getDetailViewModel()
         }
 
-//        if segue.identifier == "PushAddCitySegue" {
-//            guard let viewController = segue.destination as? AddCityViewController else {
-//                return
-//            }
-//
-//            viewController.dataManager = dataManager
-//        }
+        if segue.identifier == "PushAddCitySegue" {
+            guard let viewController = segue.destination as? AddCityViewController else {
+                return
+            }
+
+            viewController.viewModel = viewModel.getAddCityViewModel()
+        }
 
         if segue.identifier == "PushMapSegue" {
             guard let viewController = segue.destination as? MapViewController else {

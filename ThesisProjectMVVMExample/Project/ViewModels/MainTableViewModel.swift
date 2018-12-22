@@ -37,7 +37,7 @@ public class MainTableViewModel {
         }
     }
     
-    // Init
+    // MARK: - Init
     public init(dataManager: DataManager) {
         self.dataManager = dataManager
     }
@@ -87,6 +87,10 @@ public class MainTableViewModel {
         
         return DetailViewModel(cityName: city.name,
                                forecastCollection: city.forecastCollection)
+    }
+    
+    public func getAddCityViewModel() -> AddCityViewModel {
+        return AddCityViewModel(dataManager: dataManager)
     }
 
     // Private methods

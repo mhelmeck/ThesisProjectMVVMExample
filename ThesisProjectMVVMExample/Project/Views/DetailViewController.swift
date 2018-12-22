@@ -10,11 +10,7 @@ import UIKit
 
 public class DetailViewController: UIViewController {
     // MARK: - Public properties
-    public var viewModel: DetailViewModel! {
-        didSet {
-            isViewModelInjected = true
-        }
-    }
+    public var viewModel: DetailViewModel!
     
     // MARK: - Private properties
     @IBOutlet private weak var forecastView: ForecastUIView!
@@ -22,15 +18,11 @@ public class DetailViewController: UIViewController {
     @IBOutlet private weak var previewButton: UIButton!
     @IBOutlet private weak var nextButton: UIButton!
     
-    private var isViewModelInjected = false
-    
     // MARK: - Init
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        guard isViewModelInjected else { return }
-        
         bind(viewModel: viewModel)
     }
     
