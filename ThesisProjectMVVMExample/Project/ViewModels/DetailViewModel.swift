@@ -11,6 +11,7 @@ public class DetailViewModel {
     public var updatePreviewButton: ((Bool) -> Void)!
     public var updateNextButton: ((Bool) -> Void)!
     public var updateForecastView: ((ForecastViewModel) -> Void)!
+    public var updateDate: ((String) -> Void)!
     
     public var cityName: String
     
@@ -21,6 +22,7 @@ public class DetailViewModel {
         didSet {
             handleButtons(at: forecastIndex)
             createForecastViewModel(at: forecastIndex)
+            updateDate(forecastCollection[forecastIndex].date)
         }
     }
     

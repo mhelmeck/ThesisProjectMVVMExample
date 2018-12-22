@@ -139,7 +139,7 @@ public class AddCityViewModel {
     }
     
     private func fetchLocations(locations: [Location]) {
-        // TODO: - should clear locations?
+        repository.clearLocations()
         locations.forEach {
             repository.addLocation(location: $0)
         }

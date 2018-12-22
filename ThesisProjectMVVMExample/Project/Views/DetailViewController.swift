@@ -83,6 +83,10 @@ public class DetailViewController: UIViewController {
             self?.forecastView.viewModel = viewModel
         }
         
+        viewModel.updateDate = { [weak self] dateText in
+            self?.dateLabel.text = dateText
+        }
+        
         viewModel.forecastIndex = 0
     }
     
