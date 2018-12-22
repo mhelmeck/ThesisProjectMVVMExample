@@ -13,10 +13,11 @@ public class MapViewController: UIViewController {
     // Properties
     @IBOutlet private weak var mapView: MKMapView!
     private var annotationView = MKPointAnnotation()
+    private var isViewModelInjected = false
     
     public var viewModel: MapViewModel! {
         didSet {
-            viewModel.isLoaded = true
+            isViewModelInjected = true
         }
     }
     
@@ -27,7 +28,7 @@ public class MapViewController: UIViewController {
     
     override public func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        guard viewModel.isLoaded else {
+        guard isViewModelInjected else {
             return
         }
         

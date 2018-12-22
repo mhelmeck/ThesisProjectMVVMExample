@@ -13,8 +13,6 @@ public struct MapViewModel {
     public var latitudeDelta = 0.7
     public var longitudeDelta = 0.7
     
-    public var isLoaded = false
-    
     public init(latitude: Double,
                 longitude: Double) {
         self.latitude = latitude

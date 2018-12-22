@@ -12,7 +12,7 @@ public class DetailViewController: UIViewController {
     // MARK: - Public properties
     public var viewModel: DetailViewModel! {
         didSet {
-            viewModel.isLoaded = true
+            isViewModelInjected = true
         }
     }
     
@@ -22,15 +22,14 @@ public class DetailViewController: UIViewController {
     @IBOutlet private weak var previewButton: UIButton!
     @IBOutlet private weak var nextButton: UIButton!
     
+    private var isViewModelInjected = false
+    
     // MARK: - Init
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         setupView()
-        // INFO: - To refactor, may be dangerous
-        guard viewModel.isLoaded else {
-            return
-        }
+        guard isViewModelInjected else { return }
         
         bind(viewModel: viewModel)
     }

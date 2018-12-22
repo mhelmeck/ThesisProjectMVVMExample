@@ -12,7 +12,6 @@ public class DetailViewModel {
     public var updateNextButton: ((Bool) -> Void)!
     public var updateForecastView: ((ForecastViewModel) -> Void)!
     
-    public var isLoaded = false
     public var cityName: String
     
     // MARK: - Private properties
