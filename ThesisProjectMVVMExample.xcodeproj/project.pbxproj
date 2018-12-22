@@ -51,6 +51,10 @@
 		98E4984621CD9AA800C23611 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4984521CD9AA800C23611 /* ForecastViewModel.swift */; };
 		98E4984821CE71BC00C23611 /* AddCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4984721CE71BC00C23611 /* AddCityViewController.swift */; };
 		98E4984A21CE71D500C23611 /* AddCityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4984921CE71D500C23611 /* AddCityViewModel.swift */; };
+		98E4984D21CEC62400C23611 /* APIManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4984C21CEC62400C23611 /* APIManagerType.swift */; };
+		98E4984F21CEC62B00C23611 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4984E21CEC62B00C23611 /* APIManager.swift */; };
+		98E4985121CEC6F300C23611 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4985021CEC6F300C23611 /* APIError.swift */; };
+		98E4985421CEC73D00C23611 /* AppRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4985321CEC73D00C23611 /* AppRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +117,10 @@
 		98E4984521CD9AA800C23611 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		98E4984721CE71BC00C23611 /* AddCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewController.swift; sourceTree = "<group>"; };
 		98E4984921CE71D500C23611 /* AddCityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCityViewModel.swift; sourceTree = "<group>"; };
+		98E4984C21CEC62400C23611 /* APIManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManagerType.swift; sourceTree = "<group>"; };
+		98E4984E21CEC62B00C23611 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		98E4985021CEC6F300C23611 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		98E4985321CEC73D00C23611 /* AppRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRepository.swift; sourceTree = "<group>"; };
 		99929160BF03421331EC4945 /* Pods_ThesisProjectMVVMExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThesisProjectMVVMExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE3DAB7C47BBAA0507BC06F8 /* Pods-ThesisProjectMVVMExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVVMExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVVMExampleTests/Pods-ThesisProjectMVVMExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F0EFC0A31AE322E651BA2BBC /* Pods-ThesisProjectMVVMExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVVMExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVVMExample/Pods-ThesisProjectMVVMExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -204,8 +212,9 @@
 		98C85B6921C9900300907426 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				98E4984B21CEC61100C23611 /* API */,
+				98E4985221CEC72E00C23611 /* Repository */,
 				98C85B7221C9904B00907426 /* Extensions */,
-				98C85B6A21C9901100907426 /* APIResult.swift */,
 				98C85B6C21C9901D00907426 /* AssetCodeMapper.swift */,
 				98C85B6E21C9902F00907426 /* ButtonType.swift */,
 				98C85B7021C9904400907426 /* DataManager.swift */,
@@ -297,6 +306,25 @@
 				98C85B7921C9910E00907426 /* Models */,
 			);
 			path = Project;
+			sourceTree = "<group>";
+		};
+		98E4984B21CEC61100C23611 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				98E4984C21CEC62400C23611 /* APIManagerType.swift */,
+				98E4984E21CEC62B00C23611 /* APIManager.swift */,
+				98C85B6A21C9901100907426 /* APIResult.swift */,
+				98E4985021CEC6F300C23611 /* APIError.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		98E4985221CEC72E00C23611 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				98E4985321CEC73D00C23611 /* AppRepository.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 		A14CED487E528580629B74F5 /* Frameworks */ = {
@@ -482,6 +510,7 @@
 				98E4984321CD978600C23611 /* ForecastUIView.swift in Sources */,
 				98C85B9521C9920800907426 /* LocationAdapter.swift in Sources */,
 				98572AF721BD9F53009C8D81 /* MainTableViewController.swift in Sources */,
+				98E4985421CEC73D00C23611 /* AppRepository.swift in Sources */,
 				98C85B9121C991FC00907426 /* ForecastAdapter.swift in Sources */,
 				98E4983321CD529A00C23611 /* SeparatorStyle.swift in Sources */,
 				98C85B8B21C991A500907426 /* APISource.swift in Sources */,
@@ -491,9 +520,11 @@
 				98C85B9721C9920E00907426 /* LocationCollectionAdapter.swift in Sources */,
 				98C85B6F21C9902F00907426 /* ButtonType.swift in Sources */,
 				98C85B6B21C9901100907426 /* APIResult.swift in Sources */,
+				98E4985121CEC6F300C23611 /* APIError.swift in Sources */,
 				98C85B8F21C991F500907426 /* CoordinatesAdapter.swift in Sources */,
 				98572AFD21BD9F53009C8D81 /* ThesisProjectMVVMExample.xcdatamodeld in Sources */,
 				98E4982421CD271400C23611 /* MainTableViewCell.swift in Sources */,
+				98E4984D21CEC62400C23611 /* APIManagerType.swift in Sources */,
 				98C85B7F21C9913B00907426 /* Coordinates.swift in Sources */,
 				98E4983521CD549B00C23611 /* MapViewController.swift in Sources */,
 				98C85B7621C9906600907426 /* UIColor+Extensions.swift in Sources */,
@@ -513,6 +544,7 @@
 				98C85B8121C9914500907426 /* Forecast.swift in Sources */,
 				98E4984A21CE71D500C23611 /* AddCityViewModel.swift in Sources */,
 				98C85B8D21C991EF00907426 /* CityAdapter.swift in Sources */,
+				98E4984F21CEC62B00C23611 /* APIManager.swift in Sources */,
 				98E4983B21CD919100C23611 /* DetailViewModel.swift in Sources */,
 				98C85B7121C9904400907426 /* DataManager.swift in Sources */,
 			);

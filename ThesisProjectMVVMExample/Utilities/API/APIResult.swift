@@ -10,10 +10,5 @@ public enum APIResult<T> {
     case success(T)
     case error(Error)
 }
-public typealias APIResultHandler<T> = (APIResult<T>) -> Void
 
-public enum APIError: Error {
-    case didFailToDecode
-    case noData
-    case invalidURL
-}
+public typealias APIResultHandler<T> = (APIResult<T>) -> Void
