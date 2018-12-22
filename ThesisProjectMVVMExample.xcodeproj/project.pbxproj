@@ -45,6 +45,10 @@
 		98E4983321CD529A00C23611 /* SeparatorStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4983221CD529A00C23611 /* SeparatorStyle.swift */; };
 		98E4983521CD549B00C23611 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4983421CD549B00C23611 /* MapViewController.swift */; };
 		98E4983721CD54AF00C23611 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4983621CD54AF00C23611 /* MapViewModel.swift */; };
+		98E4983921CD918400C23611 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4983821CD918400C23611 /* DetailViewController.swift */; };
+		98E4983B21CD919100C23611 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4983A21CD919100C23611 /* DetailViewModel.swift */; };
+		98E4984321CD978600C23611 /* ForecastUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4984221CD978600C23611 /* ForecastUIView.swift */; };
+		98E4984621CD9AA800C23611 /* ForecastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E4984521CD9AA800C23611 /* ForecastViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +105,10 @@
 		98E4983221CD529A00C23611 /* SeparatorStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorStyle.swift; sourceTree = "<group>"; };
 		98E4983421CD549B00C23611 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		98E4983621CD54AF00C23611 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		98E4983821CD918400C23611 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		98E4983A21CD919100C23611 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		98E4984221CD978600C23611 /* ForecastUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastUIView.swift; sourceTree = "<group>"; };
+		98E4984521CD9AA800C23611 /* ForecastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewModel.swift; sourceTree = "<group>"; };
 		99929160BF03421331EC4945 /* Pods_ThesisProjectMVVMExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ThesisProjectMVVMExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE3DAB7C47BBAA0507BC06F8 /* Pods-ThesisProjectMVVMExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVVMExampleTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVVMExampleTests/Pods-ThesisProjectMVVMExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F0EFC0A31AE322E651BA2BBC /* Pods-ThesisProjectMVVMExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ThesisProjectMVVMExample.release.xcconfig"; path = "Pods/Target Support Files/Pods-ThesisProjectMVVMExample/Pods-ThesisProjectMVVMExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -256,6 +264,8 @@
 				98E4982221CD271400C23611 /* MainTableViewCell.swift */,
 				98E4982321CD271400C23611 /* MainTableViewCell.xib */,
 				98E4983421CD549B00C23611 /* MapViewController.swift */,
+				98E4983821CD918400C23611 /* DetailViewController.swift */,
+				98E4984221CD978600C23611 /* ForecastUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -266,6 +276,8 @@
 				98E4983021CD38ED00C23611 /* MainTableViewModel.swift */,
 				98E4982621CD2AD600C23611 /* MainTableCellViewModel.swift */,
 				98E4983621CD54AF00C23611 /* MapViewModel.swift */,
+				98E4983A21CD919100C23611 /* DetailViewModel.swift */,
+				98E4984521CD9AA800C23611 /* ForecastViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -461,12 +473,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				98E4983721CD54AF00C23611 /* MapViewModel.swift in Sources */,
+				98E4984321CD978600C23611 /* ForecastUIView.swift in Sources */,
 				98C85B9521C9920800907426 /* LocationAdapter.swift in Sources */,
 				98572AF721BD9F53009C8D81 /* MainTableViewController.swift in Sources */,
 				98C85B9121C991FC00907426 /* ForecastAdapter.swift in Sources */,
 				98E4983321CD529A00C23611 /* SeparatorStyle.swift in Sources */,
 				98C85B8B21C991A500907426 /* APISource.swift in Sources */,
 				98E4983121CD38ED00C23611 /* MainTableViewModel.swift in Sources */,
+				98E4983921CD918400C23611 /* DetailViewController.swift in Sources */,
 				98C85B9721C9920E00907426 /* LocationCollectionAdapter.swift in Sources */,
 				98C85B6F21C9902F00907426 /* ButtonType.swift in Sources */,
 				98C85B6B21C9901100907426 /* APIResult.swift in Sources */,
@@ -482,6 +496,7 @@
 				98C85B8721C9919800907426 /* APIForecast.swift in Sources */,
 				98E4982921CD2E4D00C23611 /* TableCellConfiguring.swift in Sources */,
 				98C85B7821C9906C00907426 /* UITableViewCell+Extensions.swift in Sources */,
+				98E4984621CD9AA800C23611 /* ForecastViewModel.swift in Sources */,
 				98572AF521BD9F53009C8D81 /* AppDelegate.swift in Sources */,
 				98C85B9321C9920200907426 /* ForecastCollectionAdapter.swift in Sources */,
 				98C85B7421C9905F00907426 /* UIButton+Extensions.swift in Sources */,
@@ -490,6 +505,7 @@
 				98C85B7D21C9913500907426 /* City.swift in Sources */,
 				98C85B8121C9914500907426 /* Forecast.swift in Sources */,
 				98C85B8D21C991EF00907426 /* CityAdapter.swift in Sources */,
+				98E4983B21CD919100C23611 /* DetailViewModel.swift in Sources */,
 				98C85B7121C9904400907426 /* DataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

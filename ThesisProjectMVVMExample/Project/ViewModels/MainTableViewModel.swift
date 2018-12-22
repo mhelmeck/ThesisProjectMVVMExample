@@ -81,6 +81,13 @@ public class MainTableViewModel {
         return MapViewModel(latitude: city.coordinates.lat,
                             longitude: city.coordinates.lon)
     }
+    
+    public func getDetailViewModel() -> DetailViewModel {
+        let city = dataManager.cityCollection[selectedIndex]
+        
+        return DetailViewModel(cityName: city.name,
+                               forecastCollection: city.forecastCollection)
+    }
 
     // Private methods
     private func createCellViewModel(city: City) -> MainTableCellViewModel {

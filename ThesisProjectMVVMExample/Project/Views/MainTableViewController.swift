@@ -73,16 +73,14 @@ public class MainTableViewController: UITableViewController {
     
     // Actions
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "PushDetailsSegue" {
-//            guard let viewController = segue.destination as? DetailViewController else {
-//                return
-//            }
-//
-//            let city = dataManager.cityCollection[selectedIndex]
-//            viewController.forecastCollection = city.forecastCollection
-//            viewController.cityName = city.name
-//        }
-//
+        if segue.identifier == "PushDetailsSegue" {
+            guard let viewController = segue.destination as? DetailViewController else {
+                return
+            }
+
+            viewController.viewModel = viewModel.getDetailViewModel()
+        }
+
 //        if segue.identifier == "PushAddCitySegue" {
 //            guard let viewController = segue.destination as? AddCityViewController else {
 //                return
