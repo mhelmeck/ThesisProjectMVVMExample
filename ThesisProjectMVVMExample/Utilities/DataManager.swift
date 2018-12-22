@@ -40,14 +40,17 @@ public class DataManager {
         }
     }
     
-    public func fetchLocation(withLatLon lat: String, _ lon: String, completion: @escaping ([APIParent]) -> Void) {
+    public func fetchLocation(withLatLon lat: String, _ lon: String, completion: @escaping ([Location]) -> Void) {
         let urlString = "https://www.metaweather.com/api/location/search/?lattlong=\(lat),\(lon)"
         fetchData(withURLString: urlString) { (result: APIResult<[APIParent]>) in
             switch result {
             case .error(let error):
                 print("Error: \(error)")
             case .success(let result):
-                completion(result)
+                let adapter = LocationCollectionAdapter(apiParentCollection: result)
+                let locationCollection = adapter.toLocationCollection()
+                
+                completion(locationCollection)
             }
         }
     }

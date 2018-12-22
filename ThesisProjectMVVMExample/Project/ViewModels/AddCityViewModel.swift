@@ -32,6 +32,7 @@ public class AddCityViewModel {
     
     // MARK: - Private properties
     private let dataManager: DataManager
+    private var currentCoordinates: Coordinates?
     private var addCityCellViewModels = [AddCityCellViewModel]() {
         didSet {
             self.updateView()
@@ -74,16 +75,21 @@ public class AddCityViewModel {
         dataManager.fetchLocations(withQuery: phrase) { [weak self] in
             guard let self = self else { return }
             
-            self.addCityCellViewModels.removeAll()
-            self.dataManager.locationCollection.forEach { location in
-                self.addCityCellViewModels.append(self.createAddCityCellViewModel(location: location))
-            }
-            self.updateView()
+            self.fetchLocations()
         }
     }
     
     public func userPressedCurrentButton() {
+        guard let latitude = currentCoordinates?.lat,
+              let longitude = currentCoordinates?.lon else {
+                return
+        }
 
+        dataManager.fetchLocations(withLatLon: String(latitude), String(longitude)) { [weak self] in
+            guard let self = self else { return }
+            
+            self.fetchLocations()
+        }
     }
     
     public func userPressedCancelButton() {
@@ -107,12 +113,12 @@ public class AddCityViewModel {
                                longitude: Double) {
         
         dataManager.fetchLocation(withLatLon: String(latitude), String(longitude)) { [weak self] locations in
-            guard let current = locations.first else {
+            guard let currentLocation = locations.first else {
                 return
             }
 
-//            self?.currentLocation = currentLocation
-            self?.title = "Your current location is: \(current.title)"
+            self?.currentCoordinates = currentLocation.coordinates
+            self?.title = "Your current location is: \(currentLocation.name)"
             self?.isCurrentButtonEnabled = true
         }
     }
@@ -125,5 +131,13 @@ public class AddCityViewModel {
     private func createAddCityCellViewModel(location: Location) -> AddCityCellViewModel {
         return AddCityCellViewModel(cityName: location.name,
                                     cityCode: location.code)
+    }
+    
+    private func fetchLocations() {
+        addCityCellViewModels.removeAll()
+        dataManager.locationCollection.forEach { location in
+            addCityCellViewModels.append(createAddCityCellViewModel(location: location))
+        }
+        updateView()
     }
 }

@@ -51,16 +51,7 @@ public class AddCityViewController: UIViewController {
     }
     
     @IBAction private func searchCurrentButtonTapped(_ sender: Any) {
-//        guard let location = currentLocation else {
-//            return
-//        }
-//
-//        let lat = String(location.coordinate.latitude)
-//        let lon = String(location.coordinate.longitude)
-//
-//        dataManager.fetchLocations(withLatLon: lat, lon) {
-//            self.tableView.reloadData()
-//        }
+        viewModel.userPressedCurrentButton()
     }
     
     // MARK: - Private methods
