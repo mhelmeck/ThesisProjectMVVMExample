@@ -21,7 +21,8 @@ public class MainTableViewController: UITableViewController {
     // Setup
     override public func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = MainTableViewModel(dataManager: DataManager())
+        
+        viewModel = MainTableViewModel()
         bind(viewModel: viewModel)
         
         registerCell()

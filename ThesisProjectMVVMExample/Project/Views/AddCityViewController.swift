@@ -188,8 +188,8 @@ extension AddCityViewController: CLLocationManagerDelegate {
             return
         }
         
-        viewModel.updateLocation(latitude: currentLocation.coordinate.latitude,
-                                 longitude: currentLocation.coordinate.longitude)
+        viewModel.updateCurrentLocation(latitude: currentLocation.coordinate.latitude,
+                                        longitude: currentLocation.coordinate.longitude)
     }
     
     public func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

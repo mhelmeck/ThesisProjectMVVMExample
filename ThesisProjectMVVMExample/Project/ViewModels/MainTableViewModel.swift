@@ -30,7 +30,9 @@ public class MainTableViewModel {
     }
     
     // Private properties
-    private let dataManager: DataManager
+    private let apiManager: CityAPIProvider
+    private let repository: CityPersistence
+    
     private var cellViewModels = [MainTableCellViewModel]() {
         didSet {
             self.updateView()
@@ -38,25 +40,30 @@ public class MainTableViewModel {
     }
     
     // MARK: - Init
-    public init(dataManager: DataManager) {
-        self.dataManager = dataManager
+    public init() {
+        self.apiManager = APIManager()
+        self.repository = AppRepository.shared
     }
     
     // Public methods
     public func fetchInitialData() {
         isLoading = true
-        var requestCounter = dataManager.cityCodes.count
-        self.dataManager.cityCodes.forEach { code in
-            self.dataManager.fetchForecast(forCityCode: code) { [weak self] in
+        let initialCityCodes = ["44418", "4118", "804365"]
+        var requestCounter = initialCityCodes.count
+        
+        initialCityCodes.forEach {
+            self.apiManager.fetchCity(forCode: $0) { [weak self] in
                 guard let self = self else { return }
-                
+
+                self.repository.addCity(city: $0)
                 requestCounter -= 1
                 if requestCounter == 0 {
                     self.updateView()
                     self.separatorStyle = .singleLine
                     self.isLoading = false
-                    self.dataManager.cityCollection.forEach { city in
-                        self.cellViewModels.append(self.createCellViewModel(city: city))
+                    
+                    self.repository.getCities().forEach {
+                        self.cellViewModels.append(self.createCellViewModel(city: $0))
                     }
                 }
             }
@@ -76,28 +83,29 @@ public class MainTableViewModel {
     }
     
     public func getMapViewModel() -> MapViewModel {
-        let city = dataManager.cityCollection[selectedIndex]
+        let city = repository.getCities()[selectedIndex]
         
         return MapViewModel(latitude: city.coordinates.lat,
                             longitude: city.coordinates.lon)
     }
     
     public func getDetailViewModel() -> DetailViewModel {
-        let city = dataManager.cityCollection[selectedIndex]
+        let city = repository.getCities()[selectedIndex]
         
         return DetailViewModel(cityName: city.name,
                                forecastCollection: city.forecastCollection)
     }
     
     public func getAddCityViewModel() -> AddCityViewModel {
-        return AddCityViewModel(dataManager: dataManager)
+        return AddCityViewModel()
     }
     
     public func reloadData() {
         cellViewModels.removeAll()
-        dataManager.cityCollection.forEach { city in
-            cellViewModels.append(self.createCellViewModel(city: city))
+        repository.getCities().forEach {
+            cellViewModels.append(createCellViewModel(city: $0))
         }
+        
         updateView()
     }
 

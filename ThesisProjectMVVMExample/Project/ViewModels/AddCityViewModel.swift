@@ -31,7 +31,9 @@ public class AddCityViewModel {
     }
     
     // MARK: - Private properties
-    private let dataManager: DataManager
+    private let apiManager: APIManagerType
+    private let repository: AppRepositoryType
+    
     private var currentCoordinates: Coordinates?
     private var addCityCellViewModels = [AddCityCellViewModel]() {
         didSet {
@@ -58,13 +60,14 @@ public class AddCityViewModel {
     }
     
     // MARK: - Init
-    public init(dataManager: DataManager) {
-        self.dataManager = dataManager
+    public init() {
+        self.apiManager = APIManager()
+        self.repository = AppRepository.shared
     }
     
     // MARK: - Public methods
     public func clearData() {
-        dataManager.locationCollection.removeAll()
+        repository.clearLocations()
     }
     
     public func userPressedSearchButton() {
@@ -72,10 +75,10 @@ public class AddCityViewModel {
             return
         }
         
-        dataManager.fetchLocations(withQuery: phrase) { [weak self] in
+        apiManager.fetchLocations(withQuery: phrase) { [weak self] in
             guard let self = self else { return }
-            
-            self.fetchLocations()
+
+            self.fetchLocations(locations: $0)
         }
     }
     
@@ -85,10 +88,10 @@ public class AddCityViewModel {
                 return
         }
 
-        dataManager.fetchLocations(withLatLon: String(latitude), String(longitude)) { [weak self] in
+        apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
             guard let self = self else { return }
             
-            self.fetchLocations()
+            self.fetchLocations(locations: $0)
         }
     }
     
@@ -102,18 +105,20 @@ public class AddCityViewModel {
         let cellViewModel = addCityCellViewModels[row]
         let cityCode = String(cellViewModel.cityCode)
         
-        dataManager.fetchForecast(forCityCode: cityCode) { [weak self] in
+        apiManager.fetchCity(forCode: cityCode) { [weak self] in
+            self?.repository.addCity(city: $0)
+            
             self?.clearData()
             self?.isSavingNewCity = false
             self?.closeView()
         }
     }
     
-    public func updateLocation(latitude: Double,
-                               longitude: Double) {
+    public func updateCurrentLocation(latitude: Double,
+                                      longitude: Double) {
         
-        dataManager.fetchLocation(withLatLon: String(latitude), String(longitude)) { [weak self] locations in
-            guard let currentLocation = locations.first else {
+        apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
+            guard let currentLocation = $0.first else {
                 return
             }
 
@@ -133,11 +138,17 @@ public class AddCityViewModel {
                                     cityCode: location.code)
     }
     
-    private func fetchLocations() {
-        addCityCellViewModels.removeAll()
-        dataManager.locationCollection.forEach { location in
-            addCityCellViewModels.append(createAddCityCellViewModel(location: location))
+    private func fetchLocations(locations: [Location]) {
+        // TODO: - should clear locations?
+        locations.forEach {
+            repository.addLocation(location: $0)
         }
+        
+        addCityCellViewModels.removeAll()
+        repository.getLocations().forEach {
+            addCityCellViewModels.append(createAddCityCellViewModel(location: $0))
+        }
+        
         updateView()
     }
 }
