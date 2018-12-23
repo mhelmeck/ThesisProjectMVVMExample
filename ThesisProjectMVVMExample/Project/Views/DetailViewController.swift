@@ -49,11 +49,11 @@ public class DetailViewController: UIViewController {
         perform(animation: {
             self.forecastView.alpha = 1
         }, withCompletion: nil)
-
-        dateLabel.text = "".uppercased()
     }
 
     private func setupView() {
+        dateLabel.text = "".uppercased()
+        
         previewButton.setTitle("Preview", for: .normal)
         nextButton.setTitle("Next", for: .normal)
         
