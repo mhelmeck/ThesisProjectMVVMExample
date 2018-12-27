@@ -1,12 +1,12 @@
 //
-//  DetailViewModel.swift
+//  CityDetailsViewModel.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 21/12/2018.
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 
-public class DetailViewModel {
+public class CityDetailsViewModel {
     // MARK: - Public properties
     public var updatePreviewButton: ((Bool) -> Void)!
     public var updateNextButton: ((Bool) -> Void)!

@@ -1,12 +1,12 @@
 //
-//  MainTableViewModel.swift
+//  CitiesListViewModel.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 21/12/2018.
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 
-public class MainTableViewModel {
+public class CitiesListViewModel {
     // Public properties
     public var updateView: (() -> Void)!
     public var updateSeparatorStyle: ((SeparatorStyle) -> Void)!
@@ -24,7 +24,6 @@ public class MainTableViewModel {
     }
 
     public var selectedIndex = 0
-    public var rowHeight: Float = 60.0
     public var rowsNumber: Int {
         return cellViewModels.count
     }
@@ -33,7 +32,7 @@ public class MainTableViewModel {
     private let apiManager: CityAPIProvider
     private let repository: CityPersistence
     
-    private var cellViewModels = [MainTableCellViewModel]() {
+    private var cellViewModels = [CityCellViewModel]() {
         didSet {
             self.updateView()
         }
@@ -74,30 +73,30 @@ public class MainTableViewModel {
         selectedIndex = row
     }
     
-    public func userPressedNaviagationButton(at row: Int?) {
-        selectedIndex = row ?? 0
+    public func userPressedNaviagationButton(at row: Int) {
+        selectedIndex = row
     }
     
-    public func getCellViewModel(at row: Int) -> MainTableCellViewModel {
+    public func getCellViewModel(at row: Int) -> CityCellViewModel {
         return cellViewModels[row]
     }
     
-    public func getMapViewModel() -> MapViewModel {
+    public func getShowMapViewModel() -> ShowMapViewModel {
         let city = repository.getCities()[selectedIndex]
         
-        return MapViewModel(latitude: city.coordinates.lat,
-                            longitude: city.coordinates.lon)
+        return ShowMapViewModel(latitude: city.coordinates.lat,
+                                longitude: city.coordinates.lon)
     }
     
-    public func getDetailViewModel() -> DetailViewModel {
+    public func getCityDetailsViewModel() -> CityDetailsViewModel {
         let city = repository.getCities()[selectedIndex]
         
-        return DetailViewModel(cityName: city.name,
-                               forecastCollection: city.forecastCollection)
+        return CityDetailsViewModel(cityName: city.name,
+                                    forecastCollection: city.forecastCollection)
     }
     
-    public func getAddCityViewModel() -> AddCityViewModel {
-        return AddCityViewModel()
+    public func getSearchLocationViewModel() -> SearchLocationViewModel {
+        return SearchLocationViewModel()
     }
     
     public func reloadData() {
@@ -110,12 +109,12 @@ public class MainTableViewModel {
     }
 
     // Private methods
-    private func createCellViewModel(city: City) -> MainTableCellViewModel {
+    private func createCellViewModel(city: City) -> CityCellViewModel {
         let temperature = [String(Int(city.brief.currentTemperature)), "°C"].joined(separator: " ")
         let iconName = AssetCodeMapper.map(city.brief.asset)
         
-        return MainTableCellViewModel(cityName: city.name,
-                                      temperature: temperature,
-                                      iconName: iconName)
+        return CityCellViewModel(cityName: city.name,
+                                 temperature: temperature,
+                                 iconName: iconName)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  AddCityViewController.swift
+//  SearchLocationViewController.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 22/12/2018.
@@ -9,9 +9,9 @@
 import MapKit
 import UIKit
 
-public class AddCityViewController: UIViewController {
+public class SearchLocationViewController: UIViewController {
     // MARK: - Public properties
-    public var viewModel: AddCityViewModel!
+    public var viewModel: SearchLocationViewModel!
 
     // MARK: - Private properties
     @IBOutlet private weak var cancelButton: UIButton!
@@ -97,7 +97,7 @@ public class AddCityViewController: UIViewController {
         searchCurrentButton.isEnabled = false
     }
     
-    private func bind(viewModel: AddCityViewModel) {
+    private func bind(viewModel: SearchLocationViewModel) {
         viewModel.updateView = { [weak self] in
             self?.tableView.reloadData()
         }
@@ -141,8 +141,7 @@ public class AddCityViewController: UIViewController {
     }
 }
 
-// MARK: - UITextFieldDelegate
-extension AddCityViewController: UITextFieldDelegate {
+extension SearchLocationViewController: UITextFieldDelegate {
     override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -156,8 +155,7 @@ extension AddCityViewController: UITextFieldDelegate {
     }
 }
 
-// MARK: - UITableViewDelegate, UITableViewDataSource
-extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
+extension SearchLocationViewController: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.rowsNumber
     }
@@ -180,8 +178,7 @@ extension AddCityViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-// MARK: - CLLocationManagerDelegate
-extension AddCityViewController: CLLocationManagerDelegate {
+extension SearchLocationViewController: CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         locationManager.stopUpdatingLocation()
         guard let currentLocation = locations.last, viewModel != nil else {

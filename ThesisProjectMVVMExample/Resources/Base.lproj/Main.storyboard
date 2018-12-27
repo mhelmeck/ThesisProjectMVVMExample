@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Maciej Hełmecki-->
+        <!--Cities List View Controller-->
         <scene sceneID="ZUW-CN-Aix">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="F1o-xk-vlf" customClass="MainTableViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="F1o-xk-vlf" customClass="CitiesListViewController" customModule="ThesisProjectMVVMExample" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DRH-ju-FJY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -32,17 +32,17 @@
                             <outlet property="delegate" destination="F1o-xk-vlf" id="xNq-Y7-vOh"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Maciej Hełmecki" id="sHx-YN-fsR">
+                    <navigationItem key="navigationItem" id="sHx-YN-fsR">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="9Wd-b6-onO">
                             <connections>
-                                <segue destination="hbG-hd-jsA" kind="show" identifier="PushAddCitySegue" id="Bvr-kR-5zJ"/>
+                                <segue destination="hbG-hd-jsA" kind="show" identifier="PushSearchLocationSegue" id="Bvr-kR-5zJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="DRH-ju-FJY" id="LeP-ob-04m"/>
-                        <segue destination="fXw-jB-j9H" kind="show" identifier="PushMapSegue" id="IZy-Vc-rKK"/>
-                        <segue destination="y7k-wt-zUu" kind="show" identifier="PushDetailsSegue" id="dfs-PL-82u"/>
+                        <segue destination="fXw-jB-j9H" kind="show" identifier="PushShowMapSegue" id="IZy-Vc-rKK"/>
+                        <segue destination="y7k-wt-zUu" kind="show" identifier="PushCityDetailsSegue" id="dfs-PL-82u"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LQ4-ej-gNb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -65,10 +65,10 @@
             </objects>
             <point key="canvasLocation" x="-1345" y="-11"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Show Map View Controller-->
         <scene sceneID="ajG-5K-Tn1">
             <objects>
-                <viewController id="fXw-jB-j9H" customClass="MapViewController" customModule="ThesisProjectMVVMExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fXw-jB-j9H" customClass="ShowMapViewController" customModule="ThesisProjectMVVMExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rbe-G2-5T3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -94,10 +94,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="-621"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--City Details View Controller-->
         <scene sceneID="mDs-G2-n5Q">
             <objects>
-                <viewController id="y7k-wt-zUu" customClass="DetailViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="y7k-wt-zUu" customClass="CityDetailsViewController" customModule="ThesisProjectMVVMExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wB7-vx-RTN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -322,10 +322,10 @@
             </objects>
             <point key="canvasLocation" x="750" y="894"/>
         </scene>
-        <!--Add City View Controller-->
+        <!--Search Location View Controller-->
         <scene sceneID="SW1-Wf-hZ3">
             <objects>
-                <viewController id="hbG-hd-jsA" customClass="AddCityViewController" customModule="ThesisProjectMVCExample" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="hbG-hd-jsA" customClass="SearchLocationViewController" customModule="ThesisProjectMVVMExample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aiH-9s-FZU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

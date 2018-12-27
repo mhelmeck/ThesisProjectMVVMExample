@@ -1,5 +1,5 @@
 //
-//  MainTableViewController.swift
+//  CitiesListViewController.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 09/12/2018.
@@ -8,21 +8,21 @@
 
 import UIKit
 
-public class MainTableViewController: UITableViewController {
-    // Properties
+public class CitiesListViewController: UITableViewController {
+    // MARK: - Private properties
+    private var viewModel: CitiesListViewModel!
+    
     private let activityIndicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .gray)
         
         return view
     }()
     
-    private var viewModel: MainTableViewModel!
-    
-    // Setup
+    // MARK: - Init
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = MainTableViewModel()
+        viewModel = CitiesListViewModel()
         bind(viewModel: viewModel)
         
         registerCell()
@@ -31,7 +31,20 @@ public class MainTableViewController: UITableViewController {
         viewModel.fetchInitialData()
     }
     
-    private func bind(viewModel: MainTableViewModel) {
+    public override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.reloadData()
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.isNavigationBarHidden = false
+    }
+    
+    // MARK: - Private methods
+    private func bind(viewModel: CitiesListViewModel) {
         viewModel.updateView = { [weak self] in
             self?.tableView.reloadData()
         }
@@ -50,21 +63,9 @@ public class MainTableViewController: UITableViewController {
         }
     }
     
-    public override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        viewModel.reloadData()
-    }
-    
-    public override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.isNavigationBarHidden = false
-    }
-    
     private func registerCell() {
-        let nib = UINib(nibName: MainTableViewCell.identifier, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: MainTableViewCell.identifier)
+        let nib = UINib(nibName: CityCellView.identifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: CityCellView .identifier)
     }
     
     private func setupTableView() {
@@ -72,43 +73,43 @@ public class MainTableViewController: UITableViewController {
         tableView.separatorStyle = .none
     }
     
-    // Actions
+    // MARK: - Public methods
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "PushDetailsSegue" {
-            guard let viewController = segue.destination as? DetailViewController else {
+        if segue.identifier == "PushCityDetailsSegue" {
+            guard let viewController = segue.destination as? CityDetailsViewController else {
                 return
             }
 
-            viewController.viewModel = viewModel.getDetailViewModel()
+            viewController.viewModel = viewModel.getCityDetailsViewModel()
         }
 
-        if segue.identifier == "PushAddCitySegue" {
-            guard let viewController = segue.destination as? AddCityViewController else {
+        if segue.identifier == "PushSearchLocationSegue" {
+            guard let viewController = segue.destination as? SearchLocationViewController else {
                 return
             }
 
-            viewController.viewModel = viewModel.getAddCityViewModel()
+            viewController.viewModel = viewModel.getSearchLocationViewModel()
         }
 
-        if segue.identifier == "PushMapSegue" {
-            guard let viewController = segue.destination as? MapViewController else {
+        if segue.identifier == "PushShowMapSegue" {
+            guard let viewController = segue.destination as? ShowMapViewController else {
                 return
             }
             
-            viewController.viewModel = viewModel.getMapViewModel()
+            viewController.viewModel = viewModel.getShowMapViewModel()
         }
     }
 }
 
-public extension MainTableViewController {
+public extension CitiesListViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.rowsNumber
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: MainTableViewCell.identifier,
-            for: indexPath) as? MainTableViewCell else {
+            withIdentifier: CityCellView.identifier,
+            for: indexPath) as? CityCellView else {
                 fatalError("Failed to dequeue reusable cell")
         }
         
@@ -121,18 +122,21 @@ public extension MainTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.userPressedCell(at: indexPath.row)
         
-        performSegue(withIdentifier: "PushDetailsSegue", sender: nil)
+        performSegue(withIdentifier: "PushCityDetailsSegue", sender: nil)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(viewModel.rowHeight)
+        return 60.0
     }
 }
 
-extension MainTableViewController: MainTableViewCellDelegate {
-    public func mainTableViewCellDidTapNavigationButton(_ cell: MainTableViewCell) {
-        viewModel.userPressedNaviagationButton(at: tableView.indexPath(for: cell)?.row)
+extension CitiesListViewController: CityCellViewDelegate {
+    public func cityCellViewDidTapNavigationButton(_ cell: CityCellView) {
+        guard let row = tableView.indexPath(for: cell)?.row else {
+            return
+        }
         
-        performSegue(withIdentifier: "PushMapSegue", sender: nil)
+        viewModel.userPressedNaviagationButton(at: row)
+        performSegue(withIdentifier: "PushShowMapSegue", sender: nil)
     }
 }

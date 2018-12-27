@@ -1,23 +1,12 @@
 //
-//  AddCityViewModel.swift
+//  SearchLocationViewModel.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 22/12/2018.
 //  Copyright © 2018 Maciej Hełmecki. All rights reserved.
 //
 
-public struct AddCityCellViewModel {
-    public var cityName = ""
-    public var cityCode = ""
-    
-    public init(cityName: String,
-                cityCode: String) {
-        self.cityName = cityName
-        self.cityCode = cityCode
-    }
-}
-
-public class AddCityViewModel {
+public class SearchLocationViewModel {
     // MARK: - Public properties
     public var updateCurrentButton: ((Bool) -> Void)!
     public var updateIsSavingNewCity: ((Bool) -> Void)!
@@ -35,7 +24,7 @@ public class AddCityViewModel {
     private let repository: AppRepositoryType
     
     private var currentCoordinates: Coordinates?
-    private var addCityCellViewModels = [AddCityCellViewModel]() {
+    private var addCityCellViewModels = [LocationCellViewModel]() {
         didSet {
             self.updateView()
         }
@@ -128,14 +117,14 @@ public class AddCityViewModel {
         }
     }
     
-    public func getAddCityCellViewModel(at row: Int) -> AddCityCellViewModel {
+    public func getAddCityCellViewModel(at row: Int) -> LocationCellViewModel {
         return addCityCellViewModels[row]
     }
     
     // MARK: - Private methods
-    private func createAddCityCellViewModel(location: Location) -> AddCityCellViewModel {
-        return AddCityCellViewModel(cityName: location.name,
-                                    cityCode: location.code)
+    private func createAddCityCellViewModel(location: Location) -> LocationCellViewModel {
+        return LocationCellViewModel(cityName: location.name,
+                                     cityCode: location.code)
     }
     
     private func fetchLocations(locations: [Location]) {

@@ -1,5 +1,5 @@
 //
-//  MapViewController.swift
+//  ShowMapViewController.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 21/12/2018.
@@ -9,14 +9,15 @@
 import MapKit
 import UIKit
 
-public class MapViewController: UIViewController {
-    // Properties
+public class ShowMapViewController: UIViewController {
+    // MARK: - Public properties
+    public var viewModel: ShowMapViewModel!
+    
+    // MARK: - Private properties
     @IBOutlet private weak var mapView: MKMapView!
     private var annotationView = MKPointAnnotation()
     
-    public var viewModel: MapViewModel!
-    
-    // Init
+    // MARK: - Init
     override public func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -27,8 +28,8 @@ public class MapViewController: UIViewController {
         reloadView()
     }
     
-    // Private methods
-    public func reloadView() {
+    // MARK: - Private methods
+    private func reloadView() {
         setupLocation()
         setupAnnotation()
     }
@@ -36,8 +37,7 @@ public class MapViewController: UIViewController {
     private func setupLocation() {
         let center = CLLocationCoordinate2D(latitude: viewModel.latitude,
                                             longitude: viewModel.longitude)
-        let span = MKCoordinateSpan(latitudeDelta: viewModel.latitudeDelta,
-                                    longitudeDelta: viewModel.longitudeDelta)
+        let span = MKCoordinateSpan(latitudeDelta: 0.7, longitudeDelta: 0.7)
         let region = MKCoordinateRegion(center: center, span: span)
         
         mapView.setRegion(region, animated: true)

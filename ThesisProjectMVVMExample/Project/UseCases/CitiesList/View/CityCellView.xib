@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dI7-01-jS7" customClass="MainTableViewCell" customModule="ThesisProjectMVVMExample">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="dI7-01-jS7" customClass="CityCellView" customModule="ThesisProjectMVVMExample" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="dI7-01-jS7" id="8PO-2Z-cT9">
@@ -79,6 +79,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="navigation_icon" width="16" height="16"/>
+        <image name="navigation_icon" width="39.724136352539062" height="39.724136352539062"/>
     </resources>
 </document>

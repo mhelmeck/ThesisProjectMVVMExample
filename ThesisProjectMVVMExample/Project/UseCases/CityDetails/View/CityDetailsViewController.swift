@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  CityDetailsViewController.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 21/12/2018.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-public class DetailViewController: UIViewController {
+public class CityDetailsViewController: UIViewController {
     // MARK: - Public properties
-    public var viewModel: DetailViewModel!
+    public var viewModel: CityDetailsViewModel!
     
     // MARK: - Private properties
     @IBOutlet private weak var forecastView: ForecastUIView!
@@ -68,7 +68,7 @@ public class DetailViewController: UIViewController {
         }
     }
     
-    private func bind(viewModel: DetailViewModel) {
+    private func bind(viewModel: CityDetailsViewModel) {
         super.title = viewModel.cityName
         
         viewModel.updatePreviewButton = { [weak self] isEnabled in
@@ -100,7 +100,7 @@ public class DetailViewController: UIViewController {
             completion: { _ in completion?() }
         )
     }
-    private func updateView(withForecast forecast: Forecast) {
-
-    }
+//    private func updateView(withForecast forecast: Forecast) {
+//
+//    }
 }

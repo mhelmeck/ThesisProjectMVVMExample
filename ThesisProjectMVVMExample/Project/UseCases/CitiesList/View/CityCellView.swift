@@ -1,5 +1,5 @@
 //
-//  MainTableViewCell.swift
+//  CityCellView.swift
 //  ThesisProjectMVVMExample
 //
 //  Created by Maciej Hełmecki on 21/12/2018.
@@ -8,18 +8,18 @@
 
 import UIKit
 
-public protocol MainTableViewCellDelegate: class {
-    func mainTableViewCellDidTapNavigationButton(_ cell: MainTableViewCell)
+public protocol CityCellViewDelegate: class {
+    func cityCellViewDidTapNavigationButton(_ cell: CityCellView)
 }
 
-public class MainTableViewCell: UITableViewCell {
+public class CityCellView: UITableViewCell {
     // Properties
     @IBOutlet private weak var cityNameLabel: UILabel!
     @IBOutlet private weak var tempLabel: UILabel!
     @IBOutlet private weak var iconImageView: UIImageView!
     
-    weak public var delegate: MainTableViewCellDelegate?
-    public var viewModel: MainTableCellViewModel! {
+    weak public var delegate: CityCellViewDelegate?
+    public var viewModel: CityCellViewModel! {
         didSet {
             bind(viewModel: viewModel)
         }
@@ -38,7 +38,7 @@ public class MainTableViewCell: UITableViewCell {
     
     // Public methods
     @IBAction public func navigationButtonTapped(_ sender: Any) {
-        delegate?.mainTableViewCellDidTapNavigationButton(self)
+        delegate?.cityCellViewDidTapNavigationButton(self)
     }
     
     // Private methods
@@ -46,7 +46,7 @@ public class MainTableViewCell: UITableViewCell {
         self.selectionStyle = .none
     }
     
-    private func bind(viewModel: MainTableCellViewModel) {
+    private func bind(viewModel: CityCellViewModel) {
         cityNameLabel.text = viewModel.cityName
         tempLabel.text = viewModel.temperature
         iconImageView.image = UIImage(named: viewModel.iconName)
