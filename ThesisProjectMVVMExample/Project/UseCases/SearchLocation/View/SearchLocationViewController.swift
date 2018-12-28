@@ -22,7 +22,11 @@ public class SearchLocationViewController: UIViewController {
     @IBOutlet private weak var currentLocationLabel: UILabel!
     
     private let locationManager = CLLocationManager()
-    private var activityIndicatorView: UIActivityIndicatorView!
+    private let activityIndicatorView: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView(style: .gray)
+        
+        return view
+    }()
     
     // MARK: - Init
     override public func viewDidLoad() {
@@ -41,7 +45,7 @@ public class SearchLocationViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     
-    // Actions
+    // MARK: - Private methods
     @IBAction private func searchButtonTapped(_ sender: Any) {
         viewModel.userPressedSearchButton()
     }
@@ -54,7 +58,6 @@ public class SearchLocationViewController: UIViewController {
         viewModel.userPressedCurrentButton()
     }
     
-    // MARK: - Private methods
     private func setupCoreLocation() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -66,7 +69,6 @@ public class SearchLocationViewController: UIViewController {
     }
     
     private func setupView() {
-        activityIndicatorView = UIActivityIndicatorView(style: .gray)
         tableView.separatorStyle = .singleLine
         
         setupTextField()
@@ -102,10 +104,6 @@ public class SearchLocationViewController: UIViewController {
             self?.tableView.reloadData()
         }
         
-        viewModel.closeView = { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
-        
         viewModel.updateTitle = { [weak self] title in
             self?.currentLocationLabel.text = title
         }
@@ -114,12 +112,12 @@ public class SearchLocationViewController: UIViewController {
             self?.searchCurrentButton.isEnabled = isEnabled
         }
         
-        viewModel.updateIsSavingNewCity = { [weak self] isSaving in
+        viewModel.updateLoadingState = { [weak self] isLoading in
             guard let self = self else {
                 return
             }
             
-            if isSaving {
+            if isLoading {
                 self.view.addSubview(self.activityIndicatorView)
                 self.activityIndicatorView.center = self.view.center
                 self.activityIndicatorView.backgroundColor = UIColor.white
@@ -132,6 +130,10 @@ public class SearchLocationViewController: UIViewController {
                 self.activityIndicatorView.stopAnimating()
                 self.tableView.isHidden = false
             }
+        }
+        
+        viewModel.closeView = { [weak self] in
+            self?.navigationController?.popViewController(animated: true)
         }
     }
     
@@ -161,11 +163,11 @@ extension SearchLocationViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "AddCityCell") else {
-            fatalError("Error")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "LocationCell") else {
+            fatalError("Failed to dequeue reusable cell")
         }
         
-        let cellViewModel = viewModel.getAddCityCellViewModel(at: indexPath.row)
+        let cellViewModel = viewModel.getLocationCellViewModel(at: indexPath.row)
         cell.selectionStyle = .none
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = cellViewModel.cityName

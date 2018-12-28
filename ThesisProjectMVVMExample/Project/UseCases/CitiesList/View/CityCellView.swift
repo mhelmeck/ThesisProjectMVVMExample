@@ -13,11 +13,12 @@ public protocol CityCellViewDelegate: class {
 }
 
 public class CityCellView: UITableViewCell {
-    // Properties
+    // MARK: - Private properties
     @IBOutlet private weak var cityNameLabel: UILabel!
     @IBOutlet private weak var tempLabel: UILabel!
     @IBOutlet private weak var iconImageView: UIImageView!
     
+    // MARK: - Public properties
     weak public var delegate: CityCellViewDelegate?
     public var viewModel: CityCellViewModel! {
         didSet {
@@ -25,23 +26,23 @@ public class CityCellView: UITableViewCell {
         }
     }
     
-    // Init
+    // MARK: - Init
     override public func awakeFromNib() {
         super.awakeFromNib()
         
         setupView()
     }
     
+    // MARK: - Public methods
     override public func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
     
-    // Public methods
     @IBAction public func navigationButtonTapped(_ sender: Any) {
         delegate?.cityCellViewDidTapNavigationButton(self)
     }
     
-    // Private methods
+    // MARK: - Private methods
     private func setupView() {
         self.selectionStyle = .none
     }

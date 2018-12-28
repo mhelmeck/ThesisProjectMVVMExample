@@ -21,7 +21,7 @@ public class CityDetailsViewModel {
     public var forecastIndex: Int = 0 {
         didSet {
             handleButtons(at: forecastIndex)
-            createForecastViewModel(at: forecastIndex)
+            updateForecastViewModel(at: forecastIndex)
             updateDate(forecastCollection[forecastIndex].date)
         }
     }
@@ -83,7 +83,7 @@ public class CityDetailsViewModel {
         }
     }
     
-    private func createForecastViewModel(at forecastIndex: Int) {
+    private func updateForecastViewModel(at forecastIndex: Int) {
         let forecast = forecastCollection[forecastIndex]
         let iconName = AssetCodeMapper.map(forecast.assetCode)
         let typeTextValue = forecast.type

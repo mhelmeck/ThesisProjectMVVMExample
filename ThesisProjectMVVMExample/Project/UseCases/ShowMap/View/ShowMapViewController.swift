@@ -35,8 +35,8 @@ public class ShowMapViewController: UIViewController {
     }
     
     private func setupLocation() {
-        let center = CLLocationCoordinate2D(latitude: viewModel.latitude,
-                                            longitude: viewModel.longitude)
+        let center = CLLocationCoordinate2D(latitude: viewModel.coordinates.latitude,
+                                            longitude: viewModel.coordinates.longitude)
         let span = MKCoordinateSpan(latitudeDelta: 0.7, longitudeDelta: 0.7)
         let region = MKCoordinateRegion(center: center, span: span)
         
@@ -44,8 +44,8 @@ public class ShowMapViewController: UIViewController {
     }
     
     private func setupAnnotation() {
-        annotationView.coordinate = CLLocationCoordinate2D(latitude: viewModel.latitude,
-                                                           longitude: viewModel.longitude)
+        annotationView.coordinate = CLLocationCoordinate2D(latitude: viewModel.coordinates.latitude,
+                                                           longitude: viewModel.coordinates.longitude)
         
         mapView.addAnnotation(annotationView)
     }

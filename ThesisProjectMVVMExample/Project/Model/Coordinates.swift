@@ -7,12 +7,12 @@
 //
 
 public struct Coordinates: Equatable {
-    public let lat: Double
-    public let lon: Double
+    public let latitude: Double
+    public let longitude: Double
     
-    public init(lat: Double,
-                lon: Double) {
-        self.lat = lat
-        self.lon = lon
+    public init(latitude: Double,
+                longitude: Double) {
+        self.latitude = latitude
+        self.longitude = longitude
     }
 }

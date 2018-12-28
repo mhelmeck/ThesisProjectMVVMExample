@@ -24,6 +24,8 @@ public class CityDetailsViewController: UIViewController {
         
         setupView()
         bind(viewModel: viewModel)
+        
+        viewModel.forecastIndex = 0
     }
     
     // MARK: - Private methods
@@ -86,8 +88,6 @@ public class CityDetailsViewController: UIViewController {
         viewModel.updateDate = { [weak self] dateText in
             self?.dateLabel.text = dateText
         }
-        
-        viewModel.forecastIndex = 0
     }
     
     private func perform(animation: @escaping () -> Void,
@@ -100,7 +100,4 @@ public class CityDetailsViewController: UIViewController {
             completion: { _ in completion?() }
         )
     }
-//    private func updateView(withForecast forecast: Forecast) {
-//
-//    }
 }

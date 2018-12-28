@@ -7,12 +7,9 @@
 //
 
 public struct ShowMapViewModel {
-    public var latitude: Double
-    public var longitude: Double
+    public var coordinates: Coordinates
     
-    public init(latitude: Double,
-                longitude: Double) {
-        self.latitude = latitude
-        self.longitude = longitude
+    public init(coordinates: Coordinates) {
+        self.coordinates = coordinates
     }
 }

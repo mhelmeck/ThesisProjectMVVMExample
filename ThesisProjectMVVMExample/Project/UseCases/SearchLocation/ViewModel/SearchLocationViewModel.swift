@@ -9,14 +9,14 @@
 public class SearchLocationViewModel {
     // MARK: - Public properties
     public var updateCurrentButton: ((Bool) -> Void)!
-    public var updateIsSavingNewCity: ((Bool) -> Void)!
+    public var updateLoadingState: ((Bool) -> Void)!
     public var updateView: (() -> Void)!
     public var closeView: (() -> Void)!
     public var updateTitle: ((String) -> Void)!
     
     public var phrase = ""
     public var rowsNumber: Int {
-        return addCityCellViewModels.count
+        return locationCellViewModels.count
     }
     
     // MARK: - Private properties
@@ -24,15 +24,15 @@ public class SearchLocationViewModel {
     private let repository: AppRepositoryType
     
     private var currentCoordinates: Coordinates?
-    private var addCityCellViewModels = [LocationCellViewModel]() {
+    private var locationCellViewModels = [LocationCellViewModel]() {
         didSet {
             self.updateView()
         }
     }
 
-    private var isSavingNewCity = false {
+    private var isLoading = false {
         didSet {
-            self.updateIsSavingNewCity(isSavingNewCity)
+            self.updateLoadingState(isLoading)
         }
     }
     
@@ -65,20 +65,24 @@ public class SearchLocationViewModel {
         }
         
         apiManager.fetchLocations(withQuery: phrase) { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
 
             self.fetchLocations(locations: $0)
         }
     }
     
     public func userPressedCurrentButton() {
-        guard let latitude = currentCoordinates?.lat,
-              let longitude = currentCoordinates?.lon else {
+        guard let latitude = currentCoordinates?.latitude,
+              let longitude = currentCoordinates?.longitude else {
                 return
         }
 
         apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
             
             self.fetchLocations(locations: $0)
         }
@@ -89,16 +93,16 @@ public class SearchLocationViewModel {
     }
     
     public func userPressedCell(at row: Int) {
-        isSavingNewCity = true
+        isLoading = true
         
-        let cellViewModel = addCityCellViewModels[row]
+        let cellViewModel = locationCellViewModels[row]
         let cityCode = String(cellViewModel.cityCode)
         
         apiManager.fetchCity(forCode: cityCode) { [weak self] in
             self?.repository.addCity(city: $0)
             
             self?.clearData()
-            self?.isSavingNewCity = false
+            self?.isLoading = false
             self?.closeView()
         }
     }
@@ -117,12 +121,12 @@ public class SearchLocationViewModel {
         }
     }
     
-    public func getAddCityCellViewModel(at row: Int) -> LocationCellViewModel {
-        return addCityCellViewModels[row]
+    public func getLocationCellViewModel(at row: Int) -> LocationCellViewModel {
+        return locationCellViewModels[row]
     }
     
     // MARK: - Private methods
-    private func createAddCityCellViewModel(location: Location) -> LocationCellViewModel {
+    private func createLocationCellViewModel(location: Location) -> LocationCellViewModel {
         return LocationCellViewModel(cityName: location.name,
                                      cityCode: location.code)
     }
@@ -133,9 +137,9 @@ public class SearchLocationViewModel {
             repository.addLocation(location: $0)
         }
         
-        addCityCellViewModels.removeAll()
+        locationCellViewModels.removeAll()
         repository.getLocations().forEach {
-            addCityCellViewModels.append(createAddCityCellViewModel(location: $0))
+            locationCellViewModels.append(createLocationCellViewModel(location: $0))
         }
         
         updateView()

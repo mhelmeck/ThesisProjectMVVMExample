@@ -10,7 +10,7 @@ import UIKit
 
 public class CitiesListViewController: UITableViewController {
     // MARK: - Private properties
-    private var viewModel: CitiesListViewModel!
+    private var viewModel: CitiesListViewModel = CitiesListViewModel()
     
     private let activityIndicatorView: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView(style: .gray)
@@ -22,11 +22,9 @@ public class CitiesListViewController: UITableViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel = CitiesListViewModel()
-        bind(viewModel: viewModel)
-        
         registerCell()
         setupTableView()
+        bind(viewModel: viewModel)
         
         viewModel.fetchInitialData()
     }
@@ -44,13 +42,23 @@ public class CitiesListViewController: UITableViewController {
     }
     
     // MARK: - Private methods
+    private func registerCell() {
+        let nib = UINib(nibName: CityCellView.identifier, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: CityCellView .identifier)
+    }
+    
+    private func setupTableView() {
+        tableView.backgroundView = activityIndicatorView
+        tableView.separatorStyle = .none
+    }
+    
     private func bind(viewModel: CitiesListViewModel) {
-        viewModel.updateView = { [weak self] in
+        viewModel.updateTableView = { [weak self] in
             self?.tableView.reloadData()
         }
         
-        viewModel.updateSeparatorStyle = { [weak self] separatorStyle in
-            switch separatorStyle {
+        viewModel.updateSeparatorStyle = { [weak self] style in
+            switch style {
             case .singleLine:
                 self?.tableView.separatorStyle = .singleLine
             case .none:
@@ -61,16 +69,6 @@ public class CitiesListViewController: UITableViewController {
         viewModel.updateActivityIndicator = { [weak self] isLoading in
             isLoading ? self?.activityIndicatorView.startAnimating() : self?.activityIndicatorView.stopAnimating()
         }
-    }
-    
-    private func registerCell() {
-        let nib = UINib(nibName: CityCellView.identifier, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: CityCellView .identifier)
-    }
-    
-    private func setupTableView() {
-        tableView.backgroundView = activityIndicatorView
-        tableView.separatorStyle = .none
     }
     
     // MARK: - Public methods
