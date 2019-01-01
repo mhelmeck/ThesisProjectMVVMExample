@@ -20,7 +20,7 @@ public class SearchLocationViewModel {
     }
     
     // MARK: - Private properties
-    private let apiManager: APIManagerType
+    private let apiManager: DataManagerType
     private let repository: AppRepositoryType
     
     private var currentCoordinates: Coordinates?
@@ -50,7 +50,7 @@ public class SearchLocationViewModel {
     
     // MARK: - Init
     public init() {
-        self.apiManager = APIManager()
+        self.apiManager = DataManager()
         self.repository = AppRepository.shared
     }
     

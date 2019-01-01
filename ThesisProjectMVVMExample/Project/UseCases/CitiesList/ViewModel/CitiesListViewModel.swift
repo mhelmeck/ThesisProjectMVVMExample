@@ -17,7 +17,7 @@ public class CitiesListViewModel {
     }
     
     // MARK: - Private properties
-    private let apiManager: CityAPIProvider
+    private let apiManager: CityProvider
     private let repository: CityPersistence
     
     private var cellViewModels = [CityCellViewModel]() {
@@ -42,7 +42,7 @@ public class CitiesListViewModel {
     
     // MARK: - Init
     public init() {
-        self.apiManager = APIManager()
+        self.apiManager = DataManager()
         self.repository = AppRepository.shared
     }
     
