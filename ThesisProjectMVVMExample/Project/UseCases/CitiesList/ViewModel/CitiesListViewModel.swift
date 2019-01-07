@@ -17,7 +17,7 @@ public class CitiesListViewModel {
     }
     
     // MARK: - Private properties
-    private let apiManager: CityProvider
+    private let dataManager: CityProvider
     private let repository: CityPersistence
     
     private var cellViewModels = [CityCellViewModel]() {
@@ -42,7 +42,7 @@ public class CitiesListViewModel {
     
     // MARK: - Init
     public init() {
-        self.apiManager = DataManager()
+        self.dataManager = DataManager()
         self.repository = AppRepository.shared
     }
     
@@ -53,7 +53,7 @@ public class CitiesListViewModel {
         var requestCounter = initialCityCodes.count
         
         initialCityCodes.forEach {
-            self.apiManager.fetchCity(forCode: $0) { [weak self] in
+            self.dataManager.fetchCity(forCode: $0) { [weak self] in
                 guard let self = self else {
                     return
                 }
@@ -61,13 +61,12 @@ public class CitiesListViewModel {
                 self.repository.addCity(city: $0)
                 requestCounter -= 1
                 if requestCounter == 0 {
-                    self.updateTableView()
-                    self.separatorStyle = .singleLine
-                    self.isLoading = false
-                    
                     self.repository.getCities().forEach {
                         self.cellViewModels.append(self.createCellViewModel(city: $0))
                     }
+                    
+                    self.separatorStyle = .singleLine
+                    self.isLoading = false
                 }
             }
         }

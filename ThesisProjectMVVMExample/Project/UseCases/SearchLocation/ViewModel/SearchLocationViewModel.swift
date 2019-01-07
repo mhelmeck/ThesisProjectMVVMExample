@@ -20,7 +20,7 @@ public class SearchLocationViewModel {
     }
     
     // MARK: - Private properties
-    private let apiManager: DataManagerType
+    private let dataManager: DataManagerType
     private let repository: AppRepositoryType
     
     private var currentCoordinates: Coordinates?
@@ -50,7 +50,7 @@ public class SearchLocationViewModel {
     
     // MARK: - Init
     public init() {
-        self.apiManager = DataManager()
+        self.dataManager = DataManager()
         self.repository = AppRepository.shared
     }
     
@@ -64,7 +64,7 @@ public class SearchLocationViewModel {
             return
         }
         
-        apiManager.fetchLocations(withQuery: phrase) { [weak self] in
+        dataManager.fetchLocations(withQuery: phrase) { [weak self] in
             guard let self = self else {
                 return
             }
@@ -79,7 +79,7 @@ public class SearchLocationViewModel {
                 return
         }
 
-        apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
+        dataManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
             guard let self = self else {
                 return
             }
@@ -98,7 +98,7 @@ public class SearchLocationViewModel {
         let cellViewModel = locationCellViewModels[row]
         let cityCode = String(cellViewModel.cityCode)
         
-        apiManager.fetchCity(forCode: cityCode) { [weak self] in
+        dataManager.fetchCity(forCode: cityCode) { [weak self] in
             self?.repository.addCity(city: $0)
             
             self?.clearData()
@@ -110,7 +110,7 @@ public class SearchLocationViewModel {
     public func updateCurrentLocation(latitude: Double,
                                       longitude: Double) {
         
-        apiManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
+        dataManager.fetchLocations(withCoordinate: String(latitude), String(longitude)) { [weak self] in
             guard let currentLocation = $0.first else {
                 return
             }
